@@ -31,6 +31,10 @@
 /*///////////////////////////////////////////////////////////////
 // Funcoes auxiliares privadas ////////////////////////////////*/
 
+/*//////////////////////////////////////////////////////////////
+// Funcao intercala: recebe vetores crecentes v[p..q-1] e v[q..r-1]
+//e rearranja v[p..r-1] em ordem crescente.
+//////////////////////////////////////////////////////////////*/
 static void intercala (int *v, int p, int q, int r) {
    int i, j, k, *w;
    w = malloc ((r - p) * sizeof (int));
@@ -46,6 +50,9 @@ static void intercala (int *v, int p, int q, int r) {
    free (w);
 }
 
+/*//////////////////////////////////////////////////////////////
+// Funcao merge: rearranja o vetor v[p..r-1] em ordem crescente.
+//////////////////////////////////////////////////////////////*/
 static void merge (int *v, int p, int r) {
    if (p < r - 1) {
       int q = (p + r) / 2;
@@ -55,29 +62,49 @@ static void merge (int *v, int p, int r) {
    }
 }
 
+/*//////////////////////////////////////////////////////////////
+// Funcao separa: recebe um vetor v[p..r] com p < r, rearranja
+//os elementos do vetor e devolve j em p..r tal que 
+//v[p..j-1] <= v[j] < v[j+1..r].
+//////////////////////////////////////////////////////////////*/
 static int separa (int *v, int p, int r) {
    int c = v[p], i = p + 1, j  = r, t;
    while (i <= j) {
-      if (v[i] <= c) i++;
-      else if (c < v[j]) j--;
+      if (v[i] <= c) ++i;
+      else if (c < v[j]) --j;
       else {
          t = v[i]; v[i] = v[j]; v[j] = t;
-         i++; j--;
+         ++i; --j;
       }
    }
    v[p] = v[j], v[j] = c;
    return j;
 }
 
+
+/*//////////////////////////////////////////////////////////////
+// Funcao quick: recebe um vetor v[p..r], com p <= r+1 e 
+//rearranja o vetor em ordem crescente.
+//////////////////////////////////////////////////////////////*/
 static void quick (int *v, int p, int r) {
-   int j;
-   if (p < r) {
-      j = separa (v, p, r);
-      quick (v, p, j - 1);
-      quick (v, j + 1, r);
+  int j;
+   while (p < r) {      
+      j = separa (v, p, r);    
+      if (j - p < r - j) {     
+         quick (v, p, j - 1);
+         p = j + 1;            
+      } else {                 
+         quick (v, j + 1, r);
+         r = j - 1;
+      }
    }
 }
 
+/*//////////////////////////////////////////////////////////////
+// Funcao peneira: recebe p em 1..m e rearranja o vetor v[1..m]
+//de modo que o "subvetor" cuja raiz e p seja um heap. Supoe que
+//os "subvetores" cujas raizes sao filhos de p ja sao heaps.
+//////////////////////////////////////////////////////////////*/
 static void peneira (int *v, int p, int m) {
    int f = 2 * p, x = v[p];
    while (f <= m) {
@@ -89,6 +116,10 @@ static void peneira (int *v, int p, int m) {
    v[p] = x;
 }
 
+/*//////////////////////////////////////////////////////////////
+// Funcao heap: rearranja os elementos do vetor v[1..n] de modo 
+//que fiquem em ordem crescente.
+//////////////////////////////////////////////////////////////*/
 static void heap (int *v, int n) {
    int p, m, x;
    for (p = n / 2; p >= 1; p--)
@@ -99,6 +130,10 @@ static void heap (int *v, int n) {
    }
 }
 
+/*///////////////////////////////////////////////////////////////
+// Funcoes publicas //////////////////////////////////////////*/
+
+/* Veja documentacao em ordenacao.h */
 void insercao (int *v, int n) {
    int i, j, x;
    for (i = 1; i < n; i++) {
@@ -109,14 +144,17 @@ void insercao (int *v, int n) {
    }
 }
 
+/* Veja documentacao em ordenacao.h */
 void mergesort (int *v, int n) {
    merge (v, 0, n);
 }
 
+/* Veja documentacao em ordenacao.h */
 void quicksort (int *v, int n) {
    quick (v, 0, n - 1);
 }
 
+/* Veja documentacao em ordenacao.h */
 void heapsort (int *v, int n) {
    heap (v - 1, n);
 }

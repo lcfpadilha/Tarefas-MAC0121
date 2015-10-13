@@ -44,15 +44,17 @@ void mergesort (int *v, int n);
 /* //////////////////////////////////////////////////////////////
 // Funcao quicksort: recebe um vetor de inteiros v[0..n-1] e 
 //rearranja seus elementos de forma a deixa-los em ordem crescente.
-//Esta funcao consome um tempo proporcional a n^2
+//Esta funcao consome um tempo proporcional a n^2 no pior caso,
+//mas em geral ela consome tempo proporcional a n*log(n) pois o
+//pior caso e bem raro.
 ////////////////////////////////////////////////////////////// */
 void quicksort (int *v, int n);
 
 /* //////////////////////////////////////////////////////////////
 // Funcao heapsort: recebe um vetor de inteiros v[0..n-1] e 
 //rearranja seus elementos de forma a deixa-los em ordem crescente.
-//Esta funcao consome um tempo proporcional a n^2 no pior caso
-//e proporcional a n no melhor caso.
+//Esta funcao consome um tempo proporcional a n*log(n) no pior
+//caso.
 ////////////////////////////////////////////////////////////// */
 void heapsort (int *v, int n);
 
