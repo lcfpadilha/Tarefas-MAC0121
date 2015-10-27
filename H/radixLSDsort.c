@@ -22,6 +22,7 @@
 ////////////////////////////////////////////////////////////// */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "ordenacao.h"
 
 int *geraVetor (int n) {
@@ -44,42 +45,34 @@ void teste (int *v, int n) {
          return;
       }
    }
-   printf ("Vetor ordenado!\n");
+   printf ("Vetor ordenado!\n\n");
 }
 
 int main (void) {
-   int *a, *b, tamanho;
+   int *a, *b, tamanho, i;
+   double tInicio, tFim;
    tamanho = 40000;
-   printf ("Iniciando ordenacao com %d elementos:\n", tamanho);
-   a = geraVetor (tamanho);
-   b = geraVetor (tamanho);
-
-   printf ("Ordenando com Heapsort!\n");
-   heapsort (a, tamanho);
-   printf ("Ordenando com Radix!\n");
-   digital (b, tamanho);
-
-   teste (a, tamanho);
-   teste (b, tamanho);
-
-   free (a);
-   free (b);
-
-   tamanho *= 2;
    
-   printf ("Iniciando ordenacao com %d elementos:\n", tamanho);
-   a = geraVetor (tamanho);
-   b = geraVetor (tamanho);
+   for (i = 0; i < 4; i++) {
+      printf ("Iniciando ordenacao com %d elementos:\n", tamanho);
+      a = geraVetor (tamanho);
+      b = geraVetor (tamanho);
+      printf ("Ordenando com Heapsort!\n");
+      tInicio = (double) clock () / CLOCKS_PER_SEC;
+      heapsort (a, tamanho);
+      tFim = (double) clock () / CLOCKS_PER_SEC;
+      printf ("Tempo gasto: %.2f\n", tFim - tInicio);
+      teste (a, tamanho);
 
-   printf ("Ordenando com Heapsort!\n");
-   heapsort (a, tamanho);
-   printf ("Ordenando com Radix!\n");
-   digital (b, tamanho);
+      printf ("Ordenando com Radix!\n");
+      tInicio = (double) clock () / CLOCKS_PER_SEC;
+      digital (b, tamanho);
+      tFim = (double) clock () / CLOCKS_PER_SEC;
+      printf ("Tempo gasto: %.2f\n", tFim - tInicio);
+      teste (b, tamanho);
 
-   teste (a, tamanho);
-   teste (b, tamanho);
-
-   free (a);
-   free (b);
+      free (a); free (b);
+      tamanho *= 2;
+   }
    return EXIT_SUCCESS;
 }
