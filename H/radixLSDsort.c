@@ -61,14 +61,14 @@ int main (void) {
       tInicio = (double) clock () / CLOCKS_PER_SEC;
       heapsort (a, tamanho);
       tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.2f\n", tFim - tInicio);
+      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
       teste (a, tamanho);
 
       printf ("Ordenando com Radix!\n");
       tInicio = (double) clock () / CLOCKS_PER_SEC;
       digital (b, tamanho);
       tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.2f\n", tFim - tInicio);
+      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
       teste (b, tamanho);
 
       free (a); free (b);
