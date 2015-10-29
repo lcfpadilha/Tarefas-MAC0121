@@ -18,23 +18,17 @@
 
 /* //////////////////////////////////////////////////////////////
 //
-// Funcoes da biblioteca ordenacao.c
+// Funcoes da biblioteca teste.c
 //
 ////////////////////////////////////////////////////////////// */
 
-#ifndef _ORDENACAO_H
-#define _ORDENACAO_H
+#ifndef _TESTE_H
+#define _TESTE_H
 
 /* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de inteiros v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem crescente.
+// Funcao teste: recebe um vetor v[0..n-1] e verifica se ele esta
+//em ordem crescente ou nao. Imprime na tela o resultado do teste.
 ////////////////////////////////////////////////////////////// */
-void heapsort (int *v, int n);
-
-/* //////////////////////////////////////////////////////////////
-// Funcao digital: recebe um vetor de inteiros v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem crescente.
-////////////////////////////////////////////////////////////// */
-void digital (int *v, int n);
+void teste (int *v, int n);
 
 #endif

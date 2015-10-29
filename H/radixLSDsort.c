@@ -18,34 +18,30 @@
 
 /* //////////////////////////////////////////////////////////////
 //
+// Programa radixLSDsort: Este programa tem como objetivo comparar
+//experimentalmente a eficiencia do metodo de ordenacao Radix sort.
+//Fazemos testes de ordenacao com vetores de 40000, 80000, 160000
+//e 320000 elementos inteiros com 9 digitos. Exibimos na tela o
+//tempo de ordenacao com o uso do Radix Sort e com o uso do Heapsort.  
 //
 ////////////////////////////////////////////////////////////// */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ordenacao.h"
+#include "teste.h"
 
+/* //////////////////////////////////////////////////////////////
+// Funcao geraVetor: recebe um inteiro n e retorna um vetor 
+//indexado de 0..n-1 composto por numeros inteiros aleatorios
+//de 9 digitos.
+////////////////////////////////////////////////////////////// */
 int *geraVetor (int n) {
    int i, *v;
    v = malloc (n * sizeof (int));
    for (i = 0; i < n; i++) 
       v[i] = (rand () % 900000000) + 100000000;
    return v;
-}
-
-/* //////////////////////////////////////////////////////////////
-// Funcao teste: recebe um vetor v[0..n-1] e verifica se ele esta
-//em ordem crescente ou nao. Imprime na tela o resultado do teste.
-////////////////////////////////////////////////////////////// */
-void teste (int *v, int n) {
-   int i;
-   for (i = 1; i < n; i++) {
-      if (v[i] < v[i - 1]) {
-         printf ("ERRO! O vetor nao esta ordenado!\n");
-         return;
-      }
-   }
-   printf ("Vetor ordenado!\n\n");
 }
 
 int main (void) {
@@ -61,14 +57,14 @@ int main (void) {
       tInicio = (double) clock () / CLOCKS_PER_SEC;
       heapsort (a, tamanho);
       tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
+      printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
       teste (a, tamanho);
 
       printf ("Ordenando com Radix!\n");
       tInicio = (double) clock () / CLOCKS_PER_SEC;
       digital (b, tamanho);
       tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
+      printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
       teste (b, tamanho);
 
       free (a); free (b);

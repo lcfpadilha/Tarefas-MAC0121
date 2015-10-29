@@ -25,6 +25,9 @@
 #include <stdlib.h>
 #include "ordenacao.h"
 
+/*///////////////////////////////////////////////////////////////
+// Funcoes auxiliares privadas ////////////////////////////////*/
+
 /*//////////////////////////////////////////////////////////////
 // Funcao peneira: recebe p em 1..m e rearranja o vetor v[1..m]
 //de modo que o "subvetor" cuja raiz e p seja um heap. Supoe que
@@ -55,6 +58,12 @@ static void heap (int *v, int n) {
    }
 }
 
+/*//////////////////////////////////////////////////////////////
+// Funcao ordenaDigital: recebe um vetor de inteiros v[0..n-1]
+//e um inteiro W que representa a quantidade de digitos que os
+//elementos de v possuem. Ordena digitalmente os elementos desse
+//vetor.
+//////////////////////////////////////////////////////////////*/
 static void ordenacaoDigital (int v[], int n, int W) {
    int d, i, r, pot;
    int *fp, *aux;
