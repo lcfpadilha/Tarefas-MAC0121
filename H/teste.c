@@ -22,15 +22,20 @@
 //
 ////////////////////////////////////////////////////////////// */
 #include <stdio.h>
+#include <string.h>
 #include "teste.h"
 
-void teste (int *v, int n) {
+/*///////////////////////////////////////////////////////////////
+// Funcoes publicas //////////////////////////////////////////*/
+
+/* Veja documentacao em teste.h */
+void teste (char **v, int n) {
    int i;
    for (i = 1; i < n; i++) {
-      if (v[i] < v[i - 1]) {
+      if (strcmp (v[i], v[i - 1]) < 0) {
          printf ("ERRO! O vetor nao esta ordenado!\n");
          return;
       }
    }
-   printf ("Vetor ordenado!\n\n");
+   printf ("Vetor ordenado!\n");
 }

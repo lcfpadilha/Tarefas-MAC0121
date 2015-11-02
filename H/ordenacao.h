@@ -26,15 +26,17 @@
 #define _ORDENACAO_H
 
 /* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de inteiros v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem crescente.
+// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
+//rearranja seus elementos de forma a deixa-los em ordem 
+//lexicografica.
 ////////////////////////////////////////////////////////////// */
-void heapsort (int *v, int n);
+void heapsort (char **v, int n);
 
 /* //////////////////////////////////////////////////////////////
-// Funcao digital: recebe um vetor de inteiros v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem crescente.
+// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
+//rearranja seus elementos de forma a deixa-los em ordem 
+//lexicografica.
 ////////////////////////////////////////////////////////////// */
-void digital (int *v, int n);
+void digital (char **v, int n);
 
 #endif

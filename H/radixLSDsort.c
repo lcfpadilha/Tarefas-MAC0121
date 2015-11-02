@@ -20,9 +20,10 @@
 //
 // Programa radixLSDsort: Este programa tem como objetivo comparar
 //experimentalmente a eficiencia do metodo de ordenacao Radix sort.
-//Fazemos testes de ordenacao com vetores de 40000, 80000, 160000
-//e 320000 elementos inteiros com 9 digitos. Exibimos na tela o
-//tempo de ordenacao com o uso do Radix Sort e com o uso do Heapsort.  
+//Fazemos testes de ordenacao com vetores de strings compostos por
+//40000, 80000, 160000 e 320000 elementos que representam numeros
+//inteiros com 9 digitos. Exibimos na tela o tempo de ordenacao 
+//com o uso do Radix Sort e com o uso do Heapsort.  
 //
 ////////////////////////////////////////////////////////////// */
 #include <stdio.h>
@@ -33,19 +34,35 @@
 
 /* //////////////////////////////////////////////////////////////
 // Funcao geraVetor: recebe um inteiro n e retorna um vetor 
-//indexado de 0..n-1 composto por numeros inteiros aleatorios
-//de 9 digitos.
+//de strings indexado de 0..n-1. O vetor sera composto por strings
+//que representam numeros aleatorios de 9 digitos.
 ////////////////////////////////////////////////////////////// */
-int *geraVetor (int n) {
-   int i, *v;
-   v = malloc (n * sizeof (int));
-   for (i = 0; i < n; i++) 
-      v[i] = (rand () % 900000000) + 100000000;
+char **geraVetor (int n) {
+   int i, t;
+   char **v;
+   v = malloc (n * sizeof (char *));
+   for (i = 0; i < n; i++) {
+      v[i] = malloc (10 * sizeof (char));
+      t = (rand () % 900000000) + 100000000;
+      sprintf (v[i], "%d", t);
+   }
    return v;
 }
 
+/* //////////////////////////////////////////////////////////////
+// Funcao desaloca: recebe um vetor de strings v[0..n-1] e desaloca
+//todos seus elementos.
+////////////////////////////////////////////////////////////// */
+void desaloca (char **v, int n) {
+   int i;
+   for (i = 0; i < n; i++) free (v[i]);
+   free (v);
+   v = NULL;
+}
+
 int main (void) {
-   int *a, *b, tamanho, i;
+   int tamanho, i;
+   char **a, **b;
    double tInicio, tFim;
    tamanho = 40000;
    
@@ -53,22 +70,28 @@ int main (void) {
       printf ("Iniciando ordenacao com %d elementos:\n", tamanho);
       a = geraVetor (tamanho);
       b = geraVetor (tamanho);
-      printf ("Ordenando com Heapsort!\n");
+      printf ("-->Ordenando com Heapsort!\n");
       tInicio = (double) clock () / CLOCKS_PER_SEC;
+
       heapsort (a, tamanho);
+
       tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
+      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
       teste (a, tamanho);
 
-      printf ("Ordenando com Radix!\n");
+      printf ("-->Ordenando com Radix!\n");
       tInicio = (double) clock () / CLOCKS_PER_SEC;
-      digital (b, tamanho);
-      tFim = (double) clock () / CLOCKS_PER_SEC;
-      printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
-      teste (b, tamanho);
 
-      free (a); free (b);
+      digital (b, tamanho);
+
+      tFim = (double) clock () / CLOCKS_PER_SEC;
+      printf ("Tempo gasto: %.2f segundos\n", tFim - tInicio);
+      teste (b, tamanho);
+      printf ("\n");
+
+      desaloca (a, tamanho); desaloca (b, tamanho);
       tamanho *= 2;
    }
+
    return EXIT_SUCCESS;
 }

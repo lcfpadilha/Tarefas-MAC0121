@@ -26,9 +26,10 @@
 #define _TESTE_H
 
 /* //////////////////////////////////////////////////////////////
-// Funcao teste: recebe um vetor v[0..n-1] e verifica se ele esta
-//em ordem crescente ou nao. Imprime na tela o resultado do teste.
+// Funcao teste: recebe um vetor de string v[0..n-1] e verifica 
+//se ele esta em ordem lexicograficae ou nao. 
+//Imprime na tela o resultado do teste.
 ////////////////////////////////////////////////////////////// */
-void teste (int *v, int n);
+void teste (char **v, int n);
 
 #endif
