@@ -18,25 +18,24 @@
 
 /* //////////////////////////////////////////////////////////////
 //
-// Funcoes da biblioteca ordenacao.c
+// Biblioteca teste.c
 //
 ////////////////////////////////////////////////////////////// */
+#include <stdio.h>
+#include <string.h>
+#include "teste.h"
 
-#ifndef _ORDENACAO_H
-#define _ORDENACAO_H
+/*///////////////////////////////////////////////////////////////
+// Funcoes publicas //////////////////////////////////////////*/
 
-/* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem 
-//lexicografica.
-////////////////////////////////////////////////////////////// */
-void heapsort (char **v, int n);
-
-/* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem 
-//lexicografica.
-////////////////////////////////////////////////////////////// */
-void digital (char **v, int n);
-
-#endif
+/* Veja documentacao em teste.h */
+void teste (char **v, int n) {
+   int i;
+   for (i = 1; i < n; i++) {
+      if (strcmp (v[i], v[i - 1]) < 0) {
+         printf ("ERRO! O vetor nao esta ordenado!\n");
+         return;
+      }
+   }
+   printf ("Vetor ordenado!\n");
+}

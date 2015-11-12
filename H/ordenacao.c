@@ -23,18 +23,24 @@
 ////////////////////////////////////////////////////////////// */
 
 #include <stdlib.h>
+#include <string.h>
 #include "ordenacao.h"
 
+/*///////////////////////////////////////////////////////////////
+// Funcoes auxiliares privadas ////////////////////////////////*/
+
 /*//////////////////////////////////////////////////////////////
-// Funcao peneira: recebe p em 1..m e rearranja o vetor v[1..m]
-//de modo que o "subvetor" cuja raiz e p seja um heap. Supoe que
-//os "subvetores" cujas raizes sao filhos de p ja sao heaps.
+// Funcao peneira: recebe p em 1..m e rearranja o vetor de string
+//v[1..m] de modo que o "subvetor" cuja raiz e p seja um heap. 
+//Supoe que os "subvetores" cujas raizes sao filhos de p 
+//ja sao heaps.
 //////////////////////////////////////////////////////////////*/
-static void peneira (int *v, int p, int m) {
-   int f = 2 * p, x = v[p];
+static void peneira (char **v, int p, int m) {
+   int f = 2 * p;
+   char *x = v[p];
    while (f <= m) {
-      if (f < m && v[f] < v[f + 1]) f++;
-      if (x >= v[f]) break;
+      if (f < m && strcmp (v[f], v[f + 1]) < 0) f++;
+      if (strcmp (x, v[f]) >= 0) break;
       v[p] = v[f];
       p = f; f = 2 * p;
    }
@@ -42,11 +48,12 @@ static void peneira (int *v, int p, int m) {
 }
 
 /*//////////////////////////////////////////////////////////////
-// Funcao heap: rearranja os elementos do vetor v[1..n] de modo 
-//que fiquem em ordem crescente.
+// Funcao heap: rearranja os elementos do vetor de strings v[1..n]
+//de modo que fiquem em ordem lexicografica.
 //////////////////////////////////////////////////////////////*/
-static void heap (int *v, int n) {
-   int p, m, x;
+static void heap (char **v, int n) {
+   int p, m;
+   char *x;
    for (p = n / 2; p >= 1; p--)
       peneira (v, p, n);
    for (m = n; m >= 2; m--) {
@@ -55,26 +62,31 @@ static void heap (int *v, int n) {
    }
 }
 
-static void ordenacaoDigital (int v[], int n, int W) {
-   int d, i, r, pot;
-   int *fp, *aux;
-   pot = 1;
-   fp = malloc (10 * sizeof (int));
-   aux = malloc (n * sizeof (int));
+/*//////////////////////////////////////////////////////////////
+// Funcao ordenaDigital: recebe um vetor v[0..n-1] de strings
+//de tamanho W sobre o alfabeto ASCII e ordena lexicograficamente 
+//o vetor v.
+//////////////////////////////////////////////////////////////*/
+static void ordenacaoDigital (char *v[], int n, int W) {
+   int d, i, r;
+   int R = 128;
+   int *fp; 
+   char **aux;
+   fp = malloc ((R + 1) * sizeof (int));
+   aux = malloc (n * sizeof (char *));
    for (d = W - 1; d >= 0; d--) {
-      for (r = 0; r <= 10; r++)
+      for (r = 0; r <= R; r++)
          fp[r] = 0;
       for (i = 0; i < n; i++)
-         fp[(v[i] / pot) % 10 + 1] += 1;
-      for (r = 1; r <= 10; r++)
+         fp[(unsigned char) v[i][d] + 1] += 1;
+      for (r = 1; r <= R; r++)
          fp[r] += fp[r - 1];
       for (i = 0; i < n; i++) {
-         aux[fp[(v[i] / pot) % 10]] = v[i];
-         fp[(v[i] / pot) % 10]++;
+         aux[fp[(unsigned char) v[i][d]]] = v[i];
+         fp[(unsigned char) v[i][d]]++;
       }
       for (i = 0; i < n; i++)
          v[i] = aux[i];
-      pot = pot * 10;
    }
    free (fp);
    free (aux);
@@ -84,11 +96,11 @@ static void ordenacaoDigital (int v[], int n, int W) {
 // Funcoes publicas //////////////////////////////////////////*/
 
 /* Veja documentacao em ordenacao.h */
-void heapsort (int *v, int n) {
+void heapsort (char **v, int n) {
    heap (v - 1, n);
 }
 
 /* Veja documentacao em ordenacao.h */
-void digital (int *v, int n) {
+void digital (char **v, int n) {
    ordenacaoDigital (v, n, 9);
 }

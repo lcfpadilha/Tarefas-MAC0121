@@ -18,25 +18,18 @@
 
 /* //////////////////////////////////////////////////////////////
 //
-// Funcoes da biblioteca ordenacao.c
+// Funcoes da biblioteca teste.c
 //
 ////////////////////////////////////////////////////////////// */
 
-#ifndef _ORDENACAO_H
-#define _ORDENACAO_H
+#ifndef _TESTE_H
+#define _TESTE_H
 
 /* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem 
-//lexicografica.
+// Funcao teste: recebe um vetor de string v[0..n-1] e verifica 
+//se ele esta em ordem lexicograficae ou nao. 
+//Imprime na tela o resultado do teste.
 ////////////////////////////////////////////////////////////// */
-void heapsort (char **v, int n);
-
-/* //////////////////////////////////////////////////////////////
-// Funcao heapsort: recebe um vetor de strings v[0..n-1] e 
-//rearranja seus elementos de forma a deixa-los em ordem 
-//lexicografica.
-////////////////////////////////////////////////////////////// */
-void digital (char **v, int n);
+void teste (char **v, int n);
 
 #endif
