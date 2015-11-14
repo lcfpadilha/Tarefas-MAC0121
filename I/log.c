@@ -15,15 +15,13 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
-#include <stdio.h>
-#include "arvore.h"
+#include "log.h"
 
-#ifndef _DICIONARIO_H
-#define _DICIONARIO_H
-
-/*///////////////////////////////////////////////////////////////
-// Funcao controiDicionario:
-///////////////////////////////////////////////////////////////*/
-arvore constroiDicionario (FILE *entrada);
-
-#endif
+int lg (int N) {  
+    int i = 0, n = N;
+    while (n > 1) {
+      n = n / 2;
+      i += 1;
+    }
+    return i;    
+}

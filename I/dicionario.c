@@ -43,8 +43,8 @@ static char *leLinha (FILE *entrada) {
         free (str);
         return NULL;
     }
-    if (i != 0 && (c == '\n' || c == EOF)) 
-        str[i++] = '\n'; /*VER COM O PROFESSOR SE TODA LINHA TERMINA COM \N*/
+    else if (i != 0) 
+        str[i++] = '\n';
     str[i] = '\0';
     return str;
 }
@@ -65,15 +65,11 @@ static void retiraPalavra (char *str, int linha) {
             p[k++] = tolower (str[i]);
         }
         else if (k > 2) {
-            if (k == tam - 1) {
-                tam *= 2;
-                p = realloc (p, (tam + 1) * sizeof (char)); 
-            }
             p[k] = '\0';
             res = busca (dic, p);
             if (res == NULL && isalpha (p[0])) { 
                 novo = criaNoh (p, linha);
-                dic = insere (dic, novo);
+                dic = insereNoh (dic, novo);
             }
             else if (res != NULL) 
                 insereLista (res->conteudo, linha);

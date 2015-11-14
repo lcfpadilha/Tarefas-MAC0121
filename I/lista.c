@@ -19,35 +19,35 @@
 #include "lista.h"
 
 lista *criaLista (int n) {
-	lista *cabeca;
-	cabeca = malloc (sizeof (lista));
-	cabeca->prox = malloc (sizeof (lista));
-	cabeca->prox->linha = n;
-	cabeca->prox->prox = NULL;
-	return cabeca;
+    lista *cabeca;
+    cabeca = malloc (sizeof (lista));
+    cabeca->prox = malloc (sizeof (lista));
+    cabeca->prox->linha = n;
+    cabeca->prox->prox = NULL;
+    return cabeca;
 }
 
 void insereLista (lista *ini, int n) {
-	lista *nova, *p;
-	p = ini;
-	while (p->prox != NULL) 
-		p = p->prox;
-	if (p->linha != n) {
-		nova = malloc (sizeof (lista));
-		nova->linha = n;
-		nova->prox = NULL;
-		p->prox = nova;
-	}
+    lista *nova, *p;
+    p = ini;
+    while (p->prox != NULL) 
+        p = p->prox;
+    if (p->linha != n) {
+        nova = malloc (sizeof (lista));
+        nova->linha = n;
+        nova->prox = NULL;
+        p->prox = nova;
+    }
 }
 
 void desalocaLista (lista *ini) {
-	lista *p, *q;
-	p = ini;
-	q = ini->prox;
-	while (q != NULL) {
-		free (p);
-		p = q;
-		q = q->prox;
-	}
-	free (p);
+    lista *p, *q;
+    p = ini;
+    q = ini->prox;
+    while (q != NULL) {
+        free (p);
+        p = q;
+        q = q->prox;
+    }
+    free (p);
 }

@@ -29,6 +29,7 @@
 #include "arvore.h"
 #include "dicionario.h"
 #include "lista.h"
+#include "log.h"
 
 
 void imprimeLinha (lista *ini, FILE *saida) {
@@ -49,15 +50,6 @@ void imprimeDic (arvore dic, FILE *saida) {
     fprintf (saida, "%s ", dic->chave);
     imprimeLinha (dic->conteudo, saida);
     imprimeDic (dic->dir, saida);
-}
-
-int lg (int N) {  
-    int i = 0, n = N;
-    while (n > 1) {
-      n = n / 2;
-      i += 1;
-    }
-    return i;    
 }
 
 int main (int numargs, char *arg[]) {

@@ -21,19 +21,19 @@
 #define _ARVORE_H
 
 struct cel {
-	char *chave;
-	lista *conteudo;
-	struct cel *esq;
-	struct cel *dir;
+    char *chave;
+    lista *conteudo;
+    struct cel *esq;
+    struct cel *dir;
 };
 typedef struct cel noh;
 typedef noh *arvore;
 
 noh *criaNoh (char *str, int i);
 
-arvore insere (arvore r, noh *novo);
+noh *busca (arvore r, char *s); 
 
-arvore busca (arvore r, char *s); 
+arvore insereNoh (arvore r, noh *novo);
 
 int altura (arvore r);
 
