@@ -20,19 +20,21 @@
 #include <string.h>
 #include <ctype.h>
 #include "arvore.h"
+#include "dicionario.h"
 #include "lista.h"
 
+static arvore dic;
 
 static char *leLinha (FILE *entrada) {
     char *str, c;
     int tam, i;
     i = 0;
     tam = 300;
-    str = aloca (tam * sizeof (char) + 1);
-    while ((c = getchar ()) != '\n' && c != EOF) {
+    str = malloc (tam * sizeof (char) + 1);
+    while ((c = getc (entrada)) != '\n' && c != EOF) {
         if (i == tam)  {
             tam *= 2;
-            str = realloc (str, (tam + 1) * sizeof (char) ); //reallocs com problema
+            str = realloc (str, (tam + 1) * sizeof (char) ); 
         }
         str[i] = c;
         i++;
@@ -46,7 +48,7 @@ static char *leLinha (FILE *entrada) {
     return str;
 }
 
-static void retiraPalavra (arvore dic, char *str, int linha) {
+static void retiraPalavra (char *str, int linha) {
     int i, tam, k;
     char *p;
     noh *novo, *res;
@@ -57,21 +59,20 @@ static void retiraPalavra (arvore dic, char *str, int linha) {
         if (isalnum (str[i])) {
             if (k == tam) {
                 tam *= 2;
-                str = realloc (str, (tam + 1) * sizeof (char)); //reallocs com problema
+                str = realloc (str, (tam + 1) * sizeof (char)); 
             }
             p[k++] = tolower (str[i]);
         }
         else if (k > 0) {
             if (k == tam) {
                 tam *= 2;
-                str = realloc (str, (tam + 1) * sizeof (char)); //reallocs com problema
+                str = realloc (str, (tam + 1) * sizeof (char)); 
             }
-            p[k] = '\n';
-            p[k + 1] = '\0';
+            p[k] = '\0';
             res = busca (dic, p);
-            if (res == NULL && isalpha (p[0])) { //procura em arvore.h
+            if (res == NULL && isalpha (p[0])) { 
                 novo = criaNoh (p, linha);
-                dic = insereNoh (dic, novo);
+                dic = insere (dic, novo);
             }
             else if (res != NULL) 
                 insereLista (res->conteudo, linha);
@@ -84,15 +85,15 @@ static void retiraPalavra (arvore dic, char *str, int linha) {
 arvore constroiDicionario (char *arq) {
     int linha = 1;
     char *str;
-    arvore dic = NULL;
     FILE *entrada;
+    dic = NULL;
     entrada = fopen (arq, "r");
     str = leLinha (entrada);
-    while (linha != NULL) {
-        retiraPalavra (dic, str, linha);
+    while (str != NULL) {
+        retiraPalavra (str, linha);
         str = leLinha (entrada);
         linha++;
     }
     fclose (entrada);
-    return arvore;
+    return dic;
 }

@@ -15,23 +15,16 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
-#include "lista.h"
+#ifndef _LISTA_H
+#define _LISTA_H
 
-#ifndef _ARVORE_H
-#define _ARVORE_H
-
-struct cel {
-	char *chave;
-	lista *conteudo;
-	struct cel *esq;
-	struct cel *dir;
+struct caixa {
+	int linha;
+	struct caixa *prox;
 };
-typedef struct cel noh;
-typedef noh *arvore;
+typedef struct caixa lista;
 
-noh *criaNoh (char *str, int i);
-arvore insere (arvore r, noh *novo);
-arvore busca (arvore r, char *s); 
-/*int contaElementos (arvore r);*/
+void insereLista (lista *ini, int n);
+lista *criaLista (int n);
 
 #endif

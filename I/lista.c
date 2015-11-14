@@ -15,23 +15,25 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
+#include <stdlib.h>
 #include "lista.h"
 
-#ifndef _ARVORE_H
-#define _ARVORE_H
+void insereLista (lista *ini, int n) {
+	lista *nova, *p;
+	nova = malloc (sizeof (lista));
+	nova->linha = n;
+	nova->prox = NULL;
+	p = ini;
+	while (p->prox != NULL) 
+		p = p->prox;
+	p->prox = nova;
+}
 
-struct cel {
-	char *chave;
-	lista *conteudo;
-	struct cel *esq;
-	struct cel *dir;
-};
-typedef struct cel noh;
-typedef noh *arvore;
-
-noh *criaNoh (char *str, int i);
-arvore insere (arvore r, noh *novo);
-arvore busca (arvore r, char *s); 
-/*int contaElementos (arvore r);*/
-
-#endif
+lista *criaLista (int n) {
+	lista *cabeca;
+	cabeca = malloc (sizeof (lista));
+	cabeca->prox = malloc (sizeof (lista));
+	cabeca->prox->linha = n;
+	cabeca->prox->prox = NULL;
+	return cabeca;
+}
