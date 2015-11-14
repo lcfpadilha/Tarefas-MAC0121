@@ -58,7 +58,27 @@ arvore busca (arvore r, char *s) {
        return busca (r->dir, s);
 }
 
-int contaElementos (arvore r) {
+int altura (arvore r) {
+	int hEsq, hDir;
+	if (r == NULL) return -1;
+	hEsq = altura (r->esq);
+	hDir = altura (r->dir);
+	if (hEsq > hDir)
+		return hEsq + 1;
+	else 
+		return hDir + 1;
+}
+
+int contaNoh (arvore r) {
 	if (r == NULL) return 0;
-	return contaElementos (r->esq) + contaElementos (r->dir) + 1;
+	return contaNoh (r->esq) + contaNoh (r->dir) + 1;
+}
+
+void desalocaArvore (arvore r) {
+	if (r == NULL) return;
+	desalocaArvore (r->esq);
+	desalocaArvore (r->dir);
+	desalocaLista (r->conteudo);
+	free (r->chave);
+	free (r);
 }

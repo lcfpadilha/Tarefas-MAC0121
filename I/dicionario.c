@@ -29,10 +29,10 @@ static char *leLinha (FILE *entrada) {
     char *str, c;
     int tam, i;
     i = 0;
-    tam = 3;
-    str = malloc ((tam) * sizeof (char));
+    tam = 300;
+    str = malloc ((tam + 1) * sizeof (char));
     while ((c = getc (entrada)) != '\n' && c != EOF) {
-        if (i == tam)  {
+        if (i == tam - 1) {
             tam *= 2;
             str = realloc (str, (tam + 1) * sizeof (char) ); 
         }
@@ -43,21 +43,32 @@ static char *leLinha (FILE *entrada) {
         free (str);
         return NULL;
     }
-    if (i != 0 && c == '\n') str[i++] = '\n';
+    if (i != 0 && (c == '\n' || c == EOF)) 
+        str[i++] = '\n'; /*VER COM O PROFESSOR SE TODA LINHA TERMINA COM \N*/
     str[i] = '\0';
     return str;
 }
 
 static void retiraPalavra (char *str, int linha) {
-    int i, k;
+    int i, tam, k;
     char *p;
     noh *novo, *res;
     k = 0;
-    p = malloc ((strlen (str) + 1) * sizeof (char));
+    tam = 300;
+    p = malloc ((tam + 1) * sizeof (char));
     for (i = 0; str[i] != '\0'; i++) { 
-        if (isalnum (str[i])) 
+        if (isalnum (str[i])) {
+            if (k == tam - 1) {
+                tam *= 2;
+                p = realloc (p, (tam + 1) * sizeof (char)); 
+            }
             p[k++] = tolower (str[i]);
+        }
         else if (k > 2) {
+            if (k == tam - 1) {
+                tam *= 2;
+                p = realloc (p, (tam + 1) * sizeof (char)); 
+            }
             p[k] = '\0';
             res = busca (dic, p);
             if (res == NULL && isalpha (p[0])) { 
@@ -80,6 +91,7 @@ arvore constroiDicionario (FILE *entrada) {
     str = leLinha (entrada);
     while (str != NULL) {
         retiraPalavra (str, linha);
+        free (str);
         str = leLinha (entrada);
         linha++;
     }

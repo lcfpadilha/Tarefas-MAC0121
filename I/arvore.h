@@ -35,6 +35,10 @@ arvore insere (arvore r, noh *novo);
 
 arvore busca (arvore r, char *s); 
 
-int contaElementos (arvore r);
+int altura (arvore r);
+
+int contaNoh (arvore r);
+
+void desalocaArvore (arvore r);
 
 #endif

@@ -51,7 +51,17 @@ void imprimeDic (arvore dic, FILE *saida) {
     imprimeDic (dic->dir, saida);
 }
 
+int lg (int N) {  
+    int i = 0, n = N;
+    while (n > 1) {
+      n = n / 2;
+      i += 1;
+    }
+    return i;    
+}
+
 int main (int numargs, char *arg[]) {
+    int n;
     double tInicio, tFim;
     arvore dic;
     FILE *saida, *entrada;
@@ -64,8 +74,14 @@ int main (int numargs, char *arg[]) {
     tInicio = (double) clock () / CLOCKS_PER_SEC;
     dic = constroiDicionario (entrada);
     tFim = (double) clock () / CLOCKS_PER_SEC;
+    printf ("RESULTADOS DO PROGRAMA:\n");
     imprimeDic (dic, saida); 
-    printf ("Tempo gasto: %3f segundos\n", tFim - tInicio);
+    printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
+    n = contaNoh (dic);
+    printf ("Quantidade de nohs: %d\n", n);
+    printf ("Piso de log n: %d\n", lg (n));
+    printf ("Altura da arvore: %d\n", altura (dic));
+    desalocaArvore (dic);
     fclose (entrada);
     fclose (saida);
     return EXIT_SUCCESS;

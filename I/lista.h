@@ -24,8 +24,10 @@ struct caixa {
 };
 typedef struct caixa lista;
 
+lista *criaLista (int n);
+
 void insereLista (lista *ini, int n);
 
-lista *criaLista (int n);
+void desalocaLista (lista *ini);
 
 #endif
