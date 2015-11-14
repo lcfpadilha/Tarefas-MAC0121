@@ -15,6 +15,7 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
+#include <stdio.h>
 #include "arvore.h"
 
 #ifndef _DICIONARIO_H
@@ -29,6 +30,6 @@
 //e sem repeticao do arquivo arq e altera o valor de n para a
 //quantidade de palavras contidas no dicionario
 ///////////////////////////////////////////////////////////////*/
-arvore constroiDicionario (char arq[]);
+arvore constroiDicionario (FILE *entrada);
 
 #endif

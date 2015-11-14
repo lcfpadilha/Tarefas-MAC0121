@@ -31,31 +31,42 @@
 #include "lista.h"
 
 
-void imprimeLista (lista *ini) {
+void imprimeLinha (lista *ini, FILE *saida) {
     lista *p;
     p = ini->prox;
+    fprintf (saida, "  %d", p->linha);
+    p = p->prox;
     while (p != NULL){
-        printf ("%d ", p->linha);
+        fprintf (saida, ", %d", p->linha);
         p = p->prox;
     }
+    fprintf (saida, "\n");
 }
 
-void imprimeDic (arvore dic) {
+void imprimeDic (arvore dic, FILE *saida) {
     if (dic == NULL) return;
-    imprimeDic (dic->esq);
-    printf ("%s ", dic->chave);
-    imprimeLista (dic->conteudo);
-    printf ("\n");
-    imprimeDic (dic->dir);
+    imprimeDic (dic->esq, saida);
+    fprintf (saida, "%s ", dic->chave);
+    imprimeLinha (dic->conteudo, saida);
+    imprimeDic (dic->dir, saida);
 }
 
 int main (int numargs, char *arg[]) {
+    double tInicio, tFim;
     arvore dic;
+    FILE *saida, *entrada;
     if (numargs != 3) {
         printf ("ERRO! Numero de argumentos devem ser 3!\n");
         return EXIT_FAILURE;
     }
-    dic = constroiDicionario (arg[1]);
-    imprimeDic (dic); /*podia estar na arvore, ne?*/
+    entrada = fopen (arg[1], "r");
+    saida = fopen (arg[2], "w");
+    tInicio = (double) clock () / CLOCKS_PER_SEC;
+    dic = constroiDicionario (entrada);
+    tFim = (double) clock () / CLOCKS_PER_SEC;
+    imprimeDic (dic, saida); 
+    printf ("Tempo gasto: %3f segundos\n", tFim - tInicio);
+    fclose (entrada);
+    fclose (saida);
     return EXIT_SUCCESS;
 }

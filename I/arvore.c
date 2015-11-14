@@ -32,6 +32,7 @@ noh *criaNoh (char *str, int i) {
 	novo->dir = NULL;
     return novo;
 }
+
 arvore insere (arvore r, noh *novo) {
 	noh *filho, *pai;
     if (r == NULL) return novo;
@@ -47,6 +48,7 @@ arvore insere (arvore r, noh *novo) {
     else  pai->dir = novo;
     return r;
 }
+
 arvore busca (arvore r, char *s) {
 	if (r == NULL || strcmp (r->chave, s) == 0)
        return r;
@@ -55,6 +57,8 @@ arvore busca (arvore r, char *s) {
     else
        return busca (r->dir, s);
 }
-/*int contaElementos (arvore r) {
 
-}*/
+int contaElementos (arvore r) {
+	if (r == NULL) return 0;
+	return contaElementos (r->esq) + contaElementos (r->dir) + 1;
+}

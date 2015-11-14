@@ -25,6 +25,7 @@ struct caixa {
 typedef struct caixa lista;
 
 void insereLista (lista *ini, int n);
+
 lista *criaLista (int n);
 
 #endif

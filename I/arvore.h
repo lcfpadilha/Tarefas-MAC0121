@@ -30,8 +30,11 @@ typedef struct cel noh;
 typedef noh *arvore;
 
 noh *criaNoh (char *str, int i);
+
 arvore insere (arvore r, noh *novo);
+
 arvore busca (arvore r, char *s); 
-/*int contaElementos (arvore r);*/
+
+int contaElementos (arvore r);
 
 #endif

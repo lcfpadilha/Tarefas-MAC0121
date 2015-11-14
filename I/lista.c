@@ -20,13 +20,15 @@
 
 void insereLista (lista *ini, int n) {
 	lista *nova, *p;
-	nova = malloc (sizeof (lista));
-	nova->linha = n;
-	nova->prox = NULL;
 	p = ini;
 	while (p->prox != NULL) 
 		p = p->prox;
-	p->prox = nova;
+	if (p->linha != n) {
+		nova = malloc (sizeof (lista));
+		nova->linha = n;
+		nova->prox = NULL;
+		p->prox = nova;
+	}
 }
 
 lista *criaLista (int n) {

@@ -29,8 +29,8 @@ static char *leLinha (FILE *entrada) {
     char *str, c;
     int tam, i;
     i = 0;
-    tam = 300;
-    str = malloc (tam * sizeof (char) + 1);
+    tam = 3;
+    str = malloc ((tam) * sizeof (char));
     while ((c = getc (entrada)) != '\n' && c != EOF) {
         if (i == tam)  {
             tam *= 2;
@@ -49,25 +49,15 @@ static char *leLinha (FILE *entrada) {
 }
 
 static void retiraPalavra (char *str, int linha) {
-    int i, tam, k;
+    int i, k;
     char *p;
     noh *novo, *res;
     k = 0;
-    tam = 300;
-    p = malloc (tam * sizeof (char));
+    p = malloc ((strlen (str) + 1) * sizeof (char));
     for (i = 0; str[i] != '\0'; i++) { 
-        if (isalnum (str[i])) {
-            if (k == tam) {
-                tam *= 2;
-                str = realloc (str, (tam + 1) * sizeof (char)); 
-            }
+        if (isalnum (str[i])) 
             p[k++] = tolower (str[i]);
-        }
-        else if (k > 0) {
-            if (k == tam) {
-                tam *= 2;
-                str = realloc (str, (tam + 1) * sizeof (char)); 
-            }
+        else if (k > 2) {
             p[k] = '\0';
             res = busca (dic, p);
             if (res == NULL && isalpha (p[0])) { 
@@ -78,22 +68,20 @@ static void retiraPalavra (char *str, int linha) {
                 insereLista (res->conteudo, linha);
             k = 0;
         }
+        else k = 0;
     }
     free (p);
 }
 
-arvore constroiDicionario (char *arq) {
+arvore constroiDicionario (FILE *entrada) {
     int linha = 1;
     char *str;
-    FILE *entrada;
     dic = NULL;
-    entrada = fopen (arq, "r");
     str = leLinha (entrada);
     while (str != NULL) {
         retiraPalavra (str, linha);
         str = leLinha (entrada);
         linha++;
     }
-    fclose (entrada);
     return dic;
 }
