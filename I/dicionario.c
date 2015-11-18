@@ -23,8 +23,19 @@
 #include "dicionario.h"
 #include "lista.h"
 
+/*///////////////////////////////////////////////////////////////
+// Variaveis globais privadas /////////////////////////////////*/
+
 static arvore dic;
 
+/*///////////////////////////////////////////////////////////////
+// Funcoes auxiliares privadas ////////////////////////////////*/
+
+/* //////////////////////////////////////////////////////////////
+// Funcao leLinha: recebe um ponteiro para um arquivo entrada e
+//retorna uma string que representa a proxima linha da entrada,
+//sempre com o ultimo caracter '\n'.
+////////////////////////////////////////////////////////////// */
 static char *leLinha (FILE *entrada) {
     char *str, c;
     int tam, i;
@@ -79,7 +90,10 @@ static void retiraPalavra (char *str, int linha) {
     }
     free (p);
 }
+/*///////////////////////////////////////////////////////////////
+// Funcoes publicas //////////////////////////////////////////*/
 
+/* Veja documentacao em dicionario.h */
 arvore constroiDicionario (FILE *entrada) {
     int linha = 1;
     char *str;

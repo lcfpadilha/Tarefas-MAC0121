@@ -18,10 +18,16 @@
 
 /* //////////////////////////////////////////////////////////////
 //
-//  Programa 
+//  Programa Indice Remissivo: este programa tem como objetivo 
+//construir um indice remissivo das palavras com mais de 2 
+//caracteres que estao em um arquivo de texto cujo nome e 
+//dado pela linha de comando, bem como o nome do arquivo de saida. 
+//O programa utilizara arvores para guardar as palavras e, ao 
+//finalizar o programa, sera impresso na saida padrao algumas 
+//informacoes (como o tempo gasto, o numero de elementos n da 
+//arvore, o piso de log n e a altura da arvore).
 //
 ////////////////////////////////////////////////////////////// */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,7 +37,11 @@
 #include "lista.h"
 #include "log.h"
 
-
+/* //////////////////////////////////////////////////////////////
+// Funcao imprimeLinha: recebe uma lista encadeada com a cabeca
+//ini e um ponteiro para arquivo saida. Imprime na saida todos
+//os elementos da lista.
+////////////////////////////////////////////////////////////// */
 void imprimeLinha (lista *ini, FILE *saida) {
     lista *p;
     p = ini->prox;
@@ -44,6 +54,11 @@ void imprimeLinha (lista *ini, FILE *saida) {
     fprintf (saida, "\n");
 }
 
+/* //////////////////////////////////////////////////////////////
+// Funcao imprimeDic: recebe uma arvore com raiz dic e um 
+//ponteiro para arquivo saida. Imprime na saida as chaves e os
+//conteudos da arvore em ordem e-r-d.
+////////////////////////////////////////////////////////////// */
 void imprimeDic (arvore dic, FILE *saida) {
     if (dic == NULL) return;
     imprimeDic (dic->esq, saida);
