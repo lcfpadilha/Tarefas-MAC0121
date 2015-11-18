@@ -36,43 +36,43 @@ typedef noh *arvore;
 
 /* //////////////////////////////////////////////////////////////
 // Funcao criaNoh: recebe uma string str e um inteiro i, cria um
-//noh com chave str e com o conteudo uma lista encadeada cujo 
-//primeiro elemento eh i e retorna um ponteiro para esse noh.
+//noh com chave str e com o conteudo uma lista encadeada com 
+//cabeca cujo primeiro elemento eh i e retorna um ponteiro para 
+//esse noh.
 ////////////////////////////////////////////////////////////// */
 noh *criaNoh (char *str, int i);
 
 /* //////////////////////////////////////////////////////////////
-// Funcao busca: Recebe uma arvore de busca binaria r e uma 
-//string s, retorna um ponteiro para noh cuja chave eh s.
-//Se esse elemento nao existir, retorna NULL.
+// Funcao busca: recebe uma arvore de busca binaria r e uma 
+//string s, retorna um ponteiro para noh que esta na arvore r e 
+//cuja chave eh s. Se esse elemento nao existir, retorna NULL.
 ////////////////////////////////////////////////////////////// */
 noh *busca (arvore r, char *s); 
 
 /* //////////////////////////////////////////////////////////////
 // Funcao insereNoh: recebe uma arvore de busca binaria r
 //e um ponteiro para noh novo. Insere esse ponteiro para
-//noh na posicao correta da arvore, de tal forma que ela continue
+//noh na posicao correta da arvore r, de tal forma que ela continue
 //uma arvore de busca binaria e retorna a raiz da arvore.
 ////////////////////////////////////////////////////////////// */
 arvore insereNoh (arvore r, noh *novo);
 
 /* //////////////////////////////////////////////////////////////
 // Funcao altura: recebe uma arvore de busca binaria r e retorna 
-//inteiro que representa a altura da arvore.
+//inteiro que representa a altura de r.
 ////////////////////////////////////////////////////////////// */
 int altura (arvore r);
 
 /* //////////////////////////////////////////////////////////////
 // Funcao contaNoh: recebe uma arvore de busca binaria r e 
-//retorna um inteiro que representa a quantidade de nohs da 
-//arvore.
+//retorna um inteiro que representa a quantidade de nohs de r.
 ////////////////////////////////////////////////////////////// */
 int contaNoh (arvore r);
 
 /* //////////////////////////////////////////////////////////////
 // Funcao desalocaArvore: recebe uma arvore r e desaloca todos 
-//seus nohs, bem como suas chaves e a lista encadeada apontada
-//pelo conteudo.
+//seus nohs, bem como suas chaves e a lista encadeada com cabeca 
+//apontada pelo conteudo.
 ////////////////////////////////////////////////////////////// */
 void desalocaArvore (arvore r);
 

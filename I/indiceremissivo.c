@@ -40,7 +40,7 @@
 /* //////////////////////////////////////////////////////////////
 // Funcao imprimeLinha: recebe uma lista encadeada com a cabeca
 //ini e um ponteiro para arquivo saida. Imprime na saida todos
-//os elementos da lista.
+//os elementos da lista ini.
 ////////////////////////////////////////////////////////////// */
 void imprimeLinha (lista *ini, FILE *saida) {
     lista *p;
@@ -55,9 +55,9 @@ void imprimeLinha (lista *ini, FILE *saida) {
 }
 
 /* //////////////////////////////////////////////////////////////
-// Funcao imprimeDic: recebe uma arvore com raiz dic e um 
+// Funcao imprimeDic: recebe uma arvore de busca binaria dic e um 
 //ponteiro para arquivo saida. Imprime na saida as chaves e os
-//conteudos da arvore em ordem e-r-d.
+//conteudos dos nohs da arvore em ordem e-r-d.
 ////////////////////////////////////////////////////////////// */
 void imprimeDic (arvore dic, FILE *saida) {
     if (dic == NULL) return;
@@ -83,8 +83,8 @@ int main (int numargs, char *arg[]) {
     tFim = (double) clock () / CLOCKS_PER_SEC;
     printf ("RESULTADOS DO PROGRAMA:\n");
     imprimeDic (dic, saida); 
-    printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
     n = contaNoh (dic);
+    printf ("Tempo gasto: %.3f segundos\n", tFim - tInicio);
     printf ("Quantidade de nohs: %d\n", n);
     printf ("Piso de log n: %d\n", lg (n));
     printf ("Altura da arvore: %d\n", altura (dic));

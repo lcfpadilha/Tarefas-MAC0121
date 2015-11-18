@@ -15,6 +15,11 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////
+//
+// Funcoes da biblioteca dicionario.c 
+//
+////////////////////////////////////////////////////////////// */
 #include <stdio.h>
 #include "arvore.h"
 
@@ -22,7 +27,12 @@
 #define _DICIONARIO_H
 
 /*///////////////////////////////////////////////////////////////
-// Funcao controiDicionario:
+// Funcao controiDicionario: recebe um ponteiro de arquivo entrada
+//e retorna uma arvore de busca binaria cujas chaves sao as 
+//palavras maiores que 2 caracteres que estao na entrada, o 
+//conteudo dos nohs sao cabecas para uma lista encadeada onde cada
+//elemento da lista eh um inteiro que representa a linha na qual
+//aquela palavra pode ser encontrada.
 ///////////////////////////////////////////////////////////////*/
 arvore constroiDicionario (FILE *entrada);
 

@@ -15,6 +15,11 @@
 // da disciplina MAC0121.
 // 
 ////////////////////////////////////////////////////////////// */
+/* //////////////////////////////////////////////////////////////
+//
+// Biblioteca dicionario.c 
+//
+////////////////////////////////////////////////////////////// */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +38,7 @@ static arvore dic;
 
 /* //////////////////////////////////////////////////////////////
 // Funcao leLinha: recebe um ponteiro para um arquivo entrada e
-//retorna uma string que representa a proxima linha da entrada,
+//retorna uma string que representa a linha lida da entrada,
 //sempre com o ultimo caracter '\n'.
 ////////////////////////////////////////////////////////////// */
 static char *leLinha (FILE *entrada) {
@@ -60,6 +65,13 @@ static char *leLinha (FILE *entrada) {
     return str;
 }
 
+/* //////////////////////////////////////////////////////////////
+// Funcao retiraPalavra: recebe uma string str e um inteiro linha,
+//retiramos as palavras de str e colocamos elas no dicionario de
+//tal forma que nao haja repeticoes no mesmo. Adicionamos a linha
+//no fim da lista encadeada apontada pelo conteudo do noh que esta
+//no dicionario e cuja chave eh a palavra.
+////////////////////////////////////////////////////////////// */
 static void retiraPalavra (char *str, int linha) {
     int i, tam, k;
     char *p;
