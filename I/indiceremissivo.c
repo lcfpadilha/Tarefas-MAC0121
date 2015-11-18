@@ -20,12 +20,14 @@
 //
 //  Programa Indice Remissivo: este programa tem como objetivo 
 //construir um indice remissivo das palavras com mais de 2 
-//caracteres que estao em um arquivo de texto cujo nome e 
-//dado pela linha de comando, bem como o nome do arquivo de saida. 
-//O programa utilizara arvores para guardar as palavras e, ao 
-//finalizar o programa, sera impresso na saida padrao algumas 
-//informacoes (como o tempo gasto, o numero de elementos n da 
-//arvore, o piso de log n e a altura da arvore).
+//caracteres que estao em um arquivo de texto. Esse indice 
+//remissivo sera impresso em outro arquivo texto. O nome dos 
+//arquivos devem ser dados pela linha de comando. 
+//O programa utilizara arvore de busca binaria para guardar as 
+//palavras e lista encadeada para guardar as linhas que cada 
+//palavra estae e, ao finalizar o programa, sera impresso na saida 
+//padrao algumas informacoes (como o tempo gasto, o numero de 
+//elementos n da arvore, o piso de log n e a altura da arvore).
 //
 ////////////////////////////////////////////////////////////// */
 #include <stdio.h>
